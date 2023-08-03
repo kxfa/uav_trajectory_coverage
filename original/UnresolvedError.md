@@ -6,7 +6,7 @@
 
 08/03/2023 00:17
 
-In `main.m`, at line 210, some internal errors occured thus raised a warning **(Error during serialization)**.
+In `main.m`, at line 183, some internal errors occured thus raised a warning **(Error during serialization)**.
 
 ```
 Warning: Error occurred while executing the listener callback for event DBStop defined for class matlab.internal.editor.debug.DebugManager:
@@ -31,7 +31,7 @@ Error in LiveEditorEvaluationHelperE1201796121 (line 222)
         GenerateSensorLocations(mapPointsNormal.S_building_sens, num_receivers);
 ```
 
-Then at line 221, the warning persisted.
+Then at line 186, the warning persisted.
 
 ```
 Warning: Error occurred while executing the listener callback for event POST_REGION defined for class matlab.internal.language.RegionEvaluator:
@@ -51,7 +51,7 @@ Error in matlab.internal.editor.FigureManager.saveSnapshot
 Error in matlab.internal.editor.FigureManager.snapshotAllFigures
 ```
 
-Also, there's an error:
+Also, there's an error at the same line:
 
 ```
 Index in position 1 exceeds array bounds.
