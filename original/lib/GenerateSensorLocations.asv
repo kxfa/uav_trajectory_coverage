@@ -24,7 +24,7 @@ function xySensorLocations = GenerateSensorLocations(S_sens,num_receivers)
         if select_idx == 0
             select_idx = 1;
         end
-        xySensorLocations(idx, :) = xy_all_possible(select_idx, 1:2);
+        xySensorLocations(idx, :) = [xy_all_possible(select_idx,1),xy_all_possible(select_idx,2)];
         xy_all_possible(select_idx,:) = [];
 
     end
