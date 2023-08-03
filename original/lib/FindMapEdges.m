@@ -1,7 +1,7 @@
-
-% FIND MAP EDGES FUNCTION
-
-function [minX_map,minY_map,maxX_map,maxY_map] = FindMapEdges(S_input)
+function mapEdges = FindMapEdges(S_input)
+% mapEdges = FindMapEdges(S_input)
+% Where mapEdges = [minX_map, minY_map, maxX_map, maxY_map];
+% Find the edge of a map in a given area.
     
     minX_map = 1e12;
     minY_map = 1e12;
@@ -23,4 +23,7 @@ function [minX_map,minY_map,maxX_map,maxY_map] = FindMapEdges(S_input)
             maxY_map = round(S_input.YLocation(idx));
         end
     end
+
+    mapEdges = [minX_map, minY_map, maxX_map, maxY_map];
+
 end

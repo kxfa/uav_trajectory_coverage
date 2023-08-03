@@ -1,3 +1,6 @@
+%% Add dependent library
+addpath('lib'); savepath;
+
 %% Building Receiver/Sensor Locations (HNoneft files)
 % Building Data Conversion from Shape Read to Mat File
 % asumes geometry of entires are polygons
@@ -69,10 +72,10 @@ city_section = 2;
 altitude_ft = -1;
 
 if altitude_ft < 0
-    shapeFilePath = "OSM_datasets/"+city+"_buildings_"+ ...
+    shapeFilePath = "../datasets/OSM_datasets/"+city+"_buildings_"+ ...
         num2str(city_section) + "/CutDown/building_polygon_HNoneft.mat"
 else
-    shapeFilePath = "OSM_datasets/"+city+"_buildings_"+ ...
+    shapeFilePath = "../datasets/OSM_datasets/"+city+"_buildings_"+ ...
         num2str(city_section) + "/CutDown/building_polygon_H"+num2str(altitude_ft)+"ft.mat"
 end
 convexContourPath = "FormattedDatasets/"+city+"_formatted/"+city+"_border_convex.mat"
@@ -135,8 +138,8 @@ decimate = false;
 makeMeters = false;
 numTableRows_raw = 0;
 
-filePath = "FormattedDatasets/"+city+"_formatted/GeoFence/2_3_23_"+city+"_geofence_"+num_case+"_H400ft.mat";
-convexContourPath = "FormattedDatasets/"+city+"_formatted/"+city+"_border_convex.mat";
+filePath = "../datasets/FormattedDatasets/"+city+"_formatted/GeoFence/2_3_23_"+city+"_geofence_"+num_case+"_H400ft.mat";
+convexContourPath = "../datasets/FormattedDatasets/"+city+"_formatted/"+city+"_border_convex.mat";
 load_building = load(convexContourPath);
 S_contour_convex = load_building.S_out;
 lat2meters = 10000000/90;
@@ -148,7 +151,7 @@ altitude_m = altitude_ft/3.281;
 [S_out,num_buildings] = PolygonMapCoords(filePath,numTableRows_raw,minX_map_m, ...
                             minY_map_m,lat2meters,long2meters,altitude_m,decimate,makeMeters,S_contour_convex);
 
-outputFilePath = "FormattedDatasets/"+city+"_formatted/PolygonMap/"+getDateLabel()+"_"+city+"_buidings_"+num_case+"_polygon_H" + ...
+outputFilePath = "../datasets/FormattedDatasets/"+city+"_formatted/PolygonMap/"+getDateLabel()+"_"+city+"_buidings_"+num_case+"_polygon_H" + ...
                 num2str(altitude_ft)+"ft_N"+num2str(num_buildings)+".mat"
 
 % save file
