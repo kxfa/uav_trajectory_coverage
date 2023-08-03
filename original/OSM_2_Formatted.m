@@ -172,7 +172,7 @@ numTableRows_raw = size(struct2table(S_raw),1)
 
 histogram_heights = zeros([numTableRows_raw,1]);
 
-for idx = 1:1:numTableRows_raw
+for idx = 1:numTableRows_raw
     height = str2double(S_raw(idx).height);
     if ~isnan(height)
         histogram_heights(idx) = height;
@@ -334,7 +334,7 @@ function [S_out,num_buildings] = PolygonMapCoords(filePath,numTableRows_raw,minX
     S_temp = struct;
     if makeMeters
         temp_idx = 1;
-        for raw_idx = 1:1:numTableRows_raw
+        for raw_idx = 1:numTableRows_raw
             height = str2double(S_raw(raw_idx).height);
             if ~isnan(height) && height > altitude
                 S_temp(temp_idx).X = ...
@@ -348,7 +348,7 @@ function [S_out,num_buildings] = PolygonMapCoords(filePath,numTableRows_raw,minX
         end
     else
         temp_idx = 1;
-        for raw_idx = 1:1:numTableRows_raw
+        for raw_idx = 1:numTableRows_raw
             height = str2double(S_raw(raw_idx).height);
             if ~isnan(height) && height > altitude
                 disp(raw_idx)
@@ -371,7 +371,7 @@ function [S_out,num_buildings] = PolygonMapCoords(filePath,numTableRows_raw,minX
     % confirm building locations are within convex contour of city
     S_temp2 = struct;
     temp2_idx = 1;
-    for temp_idx = 1:1:numTableRows_temp
+    for temp_idx = 1:numTableRows_temp
         xLocations = S_temp(temp_idx).X;
         yLocations = S_temp(temp_idx).Y;
         in_city_mask = inpolygon(xLocations,yLocations, ...
@@ -454,7 +454,7 @@ function [S_out,num_customers] = CustomerStopLocations(shapeFilePath,numTableRow
     S_temp.X = [];
     S_temp.Y = [];
     S_temp.BoundingBox = [];
-    for raw_idx = 1:1:numTableRows_raw
+    for raw_idx = 1:numTableRows_raw
         S_temp(temp_idx).BoundingBox = ...
             round(S_raw(raw_idx).BoundingBox.* ...
             [lat2meters,long2meters]) - map_minXY_meters;
@@ -468,7 +468,7 @@ function [S_out,num_customers] = CustomerStopLocations(shapeFilePath,numTableRow
 
     end
     % convert contour coordinates to meters and normalize map to minXY
-    for contour_idx = 1:1:size(struct2table(S_contour),1)
+    for contour_idx = 1:size(struct2table(S_contour),1)
         S_contour(contour_idx).contour(:,1) = ...
             round(S_contour(contour_idx).contour(:,1)*lat2meters - minX_map_m);
         S_contour(contour_idx).contour(:,2) = ...
@@ -514,7 +514,7 @@ function [S_out,num_customers] = CustomerStopLocations(shapeFilePath,numTableRow
 
     % confirm customer locations are within city boundaries
     in_city_mask = zeros([size(xLocations),1]);
-    for contour_idx = 1:1:size(struct2table(S_contour),1)
+    for contour_idx = 1:size(struct2table(S_contour),1)
         in_contour_mask = inpolygon(xLocations,yLocations, ...
                             S_contour(contour_idx).contour(:,1), ...
                             S_contour(contour_idx).contour(:,2));
@@ -578,7 +578,7 @@ function [S_out,num_buildings] = OccupancyMapMesh(filePath,numTableRows_raw,minX
     S_temp.X = [];
     S_temp.Y = [];
     S_temp.BoundingBox = [];
-    for raw_idx = 1:1:numTableRows_raw
+    for raw_idx = 1:numTableRows_raw
         if altitude < 0
             S_temp(temp_idx).BoundingBox = ...
                 round(S_raw(raw_idx).BoundingBox.* ...
@@ -775,7 +775,7 @@ function [S_out,num] = PointXYLocation(shapeFilePath,minX_map_m,minY_map_m,lat2m
     % reference point map_min_meters
     disp("Normalizing Map Data Coordinates ...")
     temp_idx = 1;
-    for raw_idx = 1:1:numTableRows_raw        
+    for raw_idx = 1:numTableRows_raw        
         S_temp(temp_idx).X = ...
             round(rmmissing(S_raw(raw_idx).X) * ...
             lat2meters - minX_map_m);
@@ -785,7 +785,7 @@ function [S_out,num] = PointXYLocation(shapeFilePath,minX_map_m,minY_map_m,lat2m
         temp_idx = temp_idx + 1;
     end
     % convert contour coordinates to meters and normalize map to minXY
-    for contour_idx = 1:1:size(struct2table(S_contour),1)
+    for contour_idx = 1:size(struct2table(S_contour),1)
         S_contour(contour_idx).contour(:,1) = ...
             round(S_contour(contour_idx).contour(:,1)*lat2meters - minX_map_m);
         S_contour(contour_idx).contour(:,2) = ...
@@ -794,7 +794,7 @@ function [S_out,num] = PointXYLocation(shapeFilePath,minX_map_m,minY_map_m,lat2m
     disp("Normalizing Map Complete!")
     
     xy_point_locations = zeros(size(struct2table(S_temp),1),2);
-    for idx = 1:1:size(struct2table(S_temp),1)
+    for idx = 1:size(struct2table(S_temp),1)
         xy_point_locations(idx,1) = S_temp(idx).X;
         xy_point_locations(idx,2) = S_temp(idx).Y;   
     end
@@ -806,7 +806,7 @@ function [S_out,num] = PointXYLocation(shapeFilePath,minX_map_m,minY_map_m,lat2m
         + num2str(length(xLocations)))
     % confirm locations are within city boundaries
     in_city_mask = zeros([size(xLocations),1]);
-    for contour_idx = 1:1:size(struct2table(S_contour),1)
+    for contour_idx = 1:size(struct2table(S_contour),1)
 
         in_contour_mask = inpolygon(xLocations,yLocations, ...
                             S_contour(contour_idx).contour(:,1), ...
@@ -841,7 +841,7 @@ function [S_out,num] = PolygonXYLocation(filePath,minX_map_m,minY_map_m,lat2mete
     % reference point map_min_meters
     disp("Normalizing Map Data Coordinates ...")
     temp_idx = 1;
-    for raw_idx = 1:1:numTableRows_raw        
+    for raw_idx = 1:numTableRows_raw        
         S_temp(temp_idx).X = ...
             round(rmmissing(S_raw(raw_idx).X) * ...
             lat2meters - minX_map_m);
@@ -857,7 +857,7 @@ function [S_out,num] = PolygonXYLocation(filePath,minX_map_m,minY_map_m,lat2mete
         S_contour.contour(:,2) = ...
             round(S_contour.contour(:,2)*long2meters - minY_map_m);
     else
-        for contour_idx = 1:1:size(struct2table(S_contour),1)
+        for contour_idx = 1:size(struct2table(S_contour),1)
             S_contour(contour_idx).contour(:,1) = ...
                 round(S_contour(contour_idx).contour(:,1)*lat2meters - minX_map_m);
             S_contour(contour_idx).contour(:,2) = ...
@@ -867,7 +867,7 @@ function [S_out,num] = PolygonXYLocation(filePath,minX_map_m,minY_map_m,lat2mete
     disp("Normalizing Map Complete!")
 
     xy_polygon_locations = zeros(size(struct2table(S_temp),1),2);
-    for idx = 1:1:size(struct2table(S_temp),1)
+    for idx = 1:size(struct2table(S_temp),1)
         xy_polygon_locations(idx,1) = mean(S_temp(idx).X);
         xy_polygon_locations(idx,2) = mean(S_temp(idx).Y);   
     end
@@ -884,7 +884,7 @@ function [S_out,num] = PolygonXYLocation(filePath,minX_map_m,minY_map_m,lat2mete
                                 S_contour.contour(:,2));
         in_city_mask = in_city_mask + in_contour_mask;
     else
-        for contour_idx = 1:1:size(struct2table(S_contour),1)
+        for contour_idx = 1:size(struct2table(S_contour),1)
             in_contour_mask = inpolygon(xLocations,yLocations, ...
                                 S_contour(contour_idx).contour(:,1), ...
                                 S_contour(contour_idx).contour(:,2));

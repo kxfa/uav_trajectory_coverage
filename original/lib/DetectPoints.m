@@ -10,7 +10,7 @@ function path_coordinates_detected = DetectPoints(path_coordinates, xyBuildingSe
     y2 = xyBuildingSensorLocations(:,2);
     
     Z = zeros(num_trajecotry_pnts,1);
-    for traj_pnt = 1:1:num_trajecotry_pnts
+    for traj_pnt = 1:num_trajecotry_pnts
         Z(traj_pnt) = min((x1(traj_pnt)-x2).^2 + (y1(traj_pnt)-y2).^2);
     end
 %     % vecotrized distance equation (that runs slower?)

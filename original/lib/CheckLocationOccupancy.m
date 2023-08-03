@@ -11,7 +11,7 @@ function xy_out = CheckLocationOccupancy(omap, xy_locations)
     % Randomly move positions on occupied spaces until they are no longer on 
     % occupied spaces
     if size(xy_occupied,1) > 0
-        for idx = 1:1:size(xy_occupied,1)
+        for idx = 1:size(xy_occupied,1)
             occupied = true;
             pos = xy_occupied(idx,:);
             while occupied

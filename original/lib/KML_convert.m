@@ -138,7 +138,7 @@ S(28).xy = KML2SHAPE(NYC_contour_5_14);
 % select which contour indexes to save
 
 % NYC selections
-idx_list = 1:1:28;
+idx_list = 1:28;
 idx_list([2:5,6,8,10:12,14:24,26:end]) = []
 
 % out_idx = 1;
@@ -179,7 +179,7 @@ axis equal
 close all
 % select which contour indexes to view
 % NYC
-idx_list = 1:1:28;  % all contours
+idx_list = 1:28;  % all contours
 idx_list = [1,7,9,13,25]  % selected contours (comment to view all contours)
 %SF
 idx_list = 1:4;
@@ -235,7 +235,7 @@ S2 = loadfile_2.S_out;
 
 figure
 hold on
-for idx = 1:1:size(S1,2)
+for idx = 1:size(S1,2)
     plot(S1(idx).contour(:,1),S1(idx).contour(:,2),'k')
 end
 plot(S2.contour(:,1),S2.contour(:,2),'r')
@@ -257,7 +257,7 @@ function xy_coords = KML2SHAPE(contour)
     minY_map_m = minY_map_long * long2meters;
 
     xy_coords = zeros(length(contour)/2,2);
-    xy_index = 1:1:length(contour);
+    xy_index = 1:length(contour);
 %     xy_coords(:,1) = contour(mod(xy_index,2)==1)*lat2meters - minX_map_m;
 %     xy_coords(:,2) = contour(mod(xy_index,2)==0)*long2meters - minY_map_m;
     xy_coords(:,1) = contour(mod(xy_index,2)==1);

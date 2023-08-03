@@ -6,7 +6,7 @@ function xySensorLocations = GenerateSensorLocations(S_sens,num_receivers)
 %     sensorMask = probability <= pecentageOfSensors;
 %         
 %     % Use binary array to select points
-%     xySensorLocations_idx = [1:1:size(struct2table(S_sens),1)];
+%     xySensorLocations_idx = [1:size(struct2table(S_sens),1)];
 %     xSensorLocations = [S_sens(xySensorLocations_idx((sensorMask))).LocationX];
 %     ySensorLocations = [S_sens(xySensorLocations_idx((sensorMask))).LocationY];
 %     xySensorLocations = horzcat(xSensorLocations',ySensorLocations');

@@ -13,7 +13,7 @@ disp("Loading Original Dataset Complete!")
 disp("Copying Desired Files ...")
 numTableRows_raw = size(struct2table(S_raw),1);
 
-for in_idx = 1:1:numTableRows_raw
+for in_idx = 1:numTableRows_raw
     S_out(in_idx).X = S_raw(in_idx).X;
     S_out(in_idx).Y = S_raw(in_idx).Y;
     S_out(in_idx).height = S_raw(in_idx).height;
