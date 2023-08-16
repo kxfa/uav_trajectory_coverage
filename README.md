@@ -2,13 +2,11 @@
 
 **Yuxuan Fang**
 
-08/03/2023
+08/16/2023
 
 ---
 
 This is the reformulated version based on Billy's work, placed in the `original` folder. The `OSM_2_Formatted.mlx` generates dependent formatted data for `main.mlx`. And `main.mlx` provides visualizations.
-
-There's an unresolved bug (_serialization error_) in the `main.mlx`. I have manually recorded a log file named `UnresolvedError.md`. I propose the reason is the high volume of reading/writing to the RAM. Still, a figure will be generated.
 
 Both of the `.mlx` live scripts can be more compact. You can try it if you like!
 
